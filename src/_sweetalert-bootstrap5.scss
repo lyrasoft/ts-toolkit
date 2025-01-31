@@ -1,0 +1,39 @@
+.swal-modal {
+  border-radius: $btn-border-radius;
+
+  .swal-footer {
+    text-align: center;
+    padding-bottom: 1.5rem;
+  }
+
+  .swal-button {
+    border-radius: $btn-border-radius;
+    padding: $btn-padding-y $btn-padding-x;
+
+    &--confirm {
+      background-color: $primary;
+      min-width: 150px;
+    }
+
+    &--confirm:hover {
+      background-color: darken($primary, 5%);
+    }
+
+    &--confirm:focus {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba($primary, .29);
+    }
+
+    &--delete {
+      background-color: $danger;
+      min-width: 150px;
+    }
+
+    &--delete:hover {
+      background-color: darken($danger, 5%);
+    }
+
+    &--delete:focus {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba($danger, .29);
+    }
+  }
+}
