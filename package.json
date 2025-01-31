@@ -1,4 +1,28 @@
 {
-  "name": "utilities",
-  "packageManager": "yarn@4.5.2"
+  "name": "@lyrasoft/ts-toolkit",
+  "version": "0.1.0",
+  "description": "LYRASOFT Typescript utilities tools.",
+  "main": "index.js",
+  "author": "Simon Asika",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "build:prod": "NODE_ENV=production rollup -c"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "@ionic/core": "^8.4.3",
+    "@ionic/vue": "^8.4.3",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^22.12.0",
+    "@vue/tsconfig": "^0.7.0",
+    "rollup": "^4.32.1",
+    "rollup-plugin-dts": "^6.1.1",
+    "sweetalert": "^2.1.2",
+    "typescript": "^5.7.3",
+    "vue": "^3.5.13"
+  }
 }
