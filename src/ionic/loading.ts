@@ -1,63 +1,42 @@
-import { simpleAlert } from '@/ionic/alert';
 import { loadingController, type LoadingOptions } from '@ionic/vue';
-import { ref, type Ref } from 'vue';
+import { ref } from 'vue';
+import { ionicAlert } from './alert';
 
-export default function useLoading(loading?: Ref<boolean>) {
-  loading = loading || ref(false);
-
-  const run = async function <T>(callback: () => Promise<T>, errorAlert = true): Promise<T> {
-    loading!.value = true;
-
-    try {
-      return await callback();
-    } catch (e: any) {
-      console.error(e);
-      if (errorAlert) {
-        simpleAlert(e?.message || 'Unknown Error', '');
-      }
-      throw e;
-    } finally {
-      loading!.value = false;
-    }
-  }
-
-  return { loading, run };
-}
-
-export async function useLoadingOverlay(message: string, options: LoadingOptions = {}) {
+export function useLoadingOverlay(message: string, options: LoadingOptions = {}) {
   const loading = ref(false);
-  const loadingCtrl = await showLoadingOverlay(message, options);
+  const loadingElement = ref<HTMLIonLoadingElement>();
+
+  const creating = createLoadingOverlay(message, options).then((v) => {
+    loadingElement.value = v;
+  });
 
   const run = async function <T>(callback: () => Promise<T>): Promise<T> {
     loading!.value = true;
-    await loadingCtrl.present();
+    await creating;
+    await loadingElement.value?.present();
 
     try {
       return await callback();
     } catch (e: any) {
       console.error(e);
-      simpleAlert(e?.message || 'Unknown Error', '');
+      ionicAlert(e?.message || 'Unknown Error', '');
       throw e;
     } finally {
-      loadingCtrl.dismiss();
+      loadingElement.value?.dismiss();
       loading!.value = false;
     }
   }
 
-  return { loading, loadingCtrl, run };
+  return { loading, loadingElement, run };
 }
 
-export async function showLoadingOverlay(message: string, options: LoadingOptions = {}): Promise<HTMLIonLoadingElement> {
-  const loading: HTMLIonLoadingElement = await loadingController.create({
+export async function createLoadingOverlay(message: string, options: LoadingOptions = {}): Promise<HTMLIonLoadingElement> {
+  return await loadingController.create({
     message: message,
     showBackdrop: true,
     duration: 5000,
     ...options
   });
-
-  await loading.present();
-
-  return loading;
 }
 
 

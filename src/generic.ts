@@ -1,3 +1,3 @@
 export * from './shared';
-export * from './basic';
+export * from './generic/index';
 

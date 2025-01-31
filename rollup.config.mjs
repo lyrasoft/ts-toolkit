@@ -31,7 +31,7 @@ export default [
   {
     input: 'src/sweetalert.ts',
     output: {
-      file: 'dist/sweetalert.d.ts',
+      file: 'src/sweetalert.d.ts',
       format: 'es',
     },
     plugins: [

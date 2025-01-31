@@ -7,7 +7,7 @@ export enum DateFormat {
   ISO8601 = 'YYYY-MM-DDTHH:mm:ssZ[Z]',
 }
 
-export function dateToFormat(date: dayjs.Dayjs | string | null, format: string = 'YYYY-MM-DD HH:mm') {
+export function dateToFormat(date: any, format: string = 'YYYY-MM-DD HH:mm') {
   if (date == null) {
     return '';
   }

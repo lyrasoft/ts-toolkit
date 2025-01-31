@@ -1,19 +1,21 @@
-import swal from 'sweetalert';
+import { AlertAdapter } from '../shared';
 
 type SwalParams = Exclude<Parameters<typeof swal>[0], string>;
 
-export function simpleAlert(
+export async function sweetAlert(
   title: string,
   text: string = '',
   icon: string = 'info',
   extra?: Partial<SwalParams>
 ) {
+  const swal = await loadSweetAlert();
+
   const params = {
     title,
     text,
     icon,
     buttons: [
-      '確認',
+      AlertAdapter.confirmText(),
     ],
   };
 
@@ -24,19 +26,21 @@ export function simpleAlert(
   return swal(params);
 }
 
-export function simpleConfirm(
+export async function sweetConfirm(
   title: string,
   text: string = '',
   icon: string = 'info',
   extra?: Partial<SwalParams>,
 ) {
+  const swal = await loadSweetAlert();
+
   const params = {
     title,
     text,
     icon,
     buttons: [
-      '取消',
-      '確認',
+      AlertAdapter.cancelText(),
+      AlertAdapter.confirmText(),
     ],
   };
 
@@ -47,24 +51,26 @@ export function simpleConfirm(
   return swal(params);
 }
 
-export function deleteConfirm(
+export async function sweetDeleteConfirm(
   title: string,
   text: string = '',
   icon: string = 'info',
   extra?: Partial<SwalParams>,
 ) {
+  const swal = await loadSweetAlert();
+
   const params = {
     title,
     text,
     icon,
     buttons: {
       cancel: {
-        text: '取消',
+        text: AlertAdapter.cancelText(),
         value: false,
         visible: true
       },
       delete: {
-        text: '刪除',
+        text: AlertAdapter.deleteText(),
         value: true,
       },
     },
@@ -75,4 +81,20 @@ export function deleteConfirm(
   }
 
   return swal(params);
+}
+
+export async function useSweetAlertAdapter(preload = false) {
+  AlertAdapter.alert = sweetAlert;
+  AlertAdapter.confirm = sweetConfirm;
+  AlertAdapter.deleteConfirm = sweetDeleteConfirm;
+
+  if (preload) {
+    await loadSweetAlert();
+  }
+}
+
+async function loadSweetAlert() {
+  const module = await import('sweetalert');
+
+  return module.default;
 }

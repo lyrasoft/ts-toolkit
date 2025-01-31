@@ -8,5 +8,5 @@ export function promiseWithResolvers<T = void>() {
   });
 
   // @ts-ignore
-  return { promise, resolve, reject }
+  return { promise, resolve, reject };
 }
