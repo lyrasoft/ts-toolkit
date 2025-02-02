@@ -27,18 +27,6 @@ if (cliInput['help'] || cliInput['h']) {
   process.exit(0);
 }
 
-console.log(`>>> yarn build:prod`);
-exec(`yarn build:prod`);
-
-console.log(`>>> yarn build:i18n`);
-exec(`yarn build:i18n`);
-
-console.log(`>>> yarn build:css`);
-exec(`yarn build:css`);
-
-console.log(`>>> yarn build:css:prod`);
-exec(`yarn build:css:prod`);
-
 console.log('>>> Git commit all');
 exec(`git add .`);
 try {
