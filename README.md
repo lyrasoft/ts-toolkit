@@ -67,7 +67,7 @@ useSweetAlertAdapter(true);
 這樣就可以用以下函式快速呼叫 SweetAlert，有三個常用函式
 
 ```ts
-import { simpleAlert, simpleConfirm } from '@lyrasoft/ts-toolkit/src/generic';
+import { simpleAlert, simpleConfirm, simpleDeleteConfirm } from '@lyrasoft/ts-toolkit/src/generic';
 
 // Alert
 await simpleAlert('Title', 'text', 'icon');
@@ -83,7 +83,7 @@ if (v) {
 }
 
 // Delete Confirm (顯示的文字會不一樣)
-const d = await simpleConfirm('Confirm title', 'Text', 'icon');
+const d = await simpleDeleteConfirm('Confirm title', 'Text', 'icon');
 
 if (d) {
   // ...
@@ -93,7 +93,7 @@ if (d) {
 載入 Bootstrap 樣式
 
 ```scss
-// main.scss
+// 要放在 BS _variables.scss 後面，因為會用到 BS 變數
 
 @import "@lyrasoft/ts-toolkit/src/sweetalert-bootstrap5";
 
