@@ -35,8 +35,8 @@ try {
   console.log(e.message);
 }
 
-console.log(`>>> npm version ${args.join(' ')}`);
-exec(`npm version ${args.join(' ')}`);
+console.log(`>>> yarn version ${args.join(' ')}`);
+exec(`yarn version ${args.join(' ')}`);
 
 const branch = cliInput['b'] || 'main';
 
