@@ -1,6 +1,5 @@
 import { alertController, } from '@ionic/vue';
 import { AlertAdapter } from '../shared';
-import { sweetAlert, sweetConfirm, sweetDeleteConfirm } from '../generic/sweetalert.ts';
 
 export async function ionicAlert(title: any, text?: string, type = 'warning'): Promise<void> {
   if (title instanceof Error || title.message) {
