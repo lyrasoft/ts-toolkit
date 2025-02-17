@@ -8,7 +8,10 @@ LYRASOFT 專案用各類實用 TS/JS 工具集。
     * [入口](#入口)
   * [Generic](#generic)
     * [AlertAdapter](#alertadapter)
+    * [Crypto](#crypto)
     * [DateTime](#datetime)
+    * [Number](#number)
+    * [Queue & Stack](#queue--stack)
     * [Promise](#promise)
     * [Timing](#timing)
     * [Typography](#typography)
@@ -16,6 +19,7 @@ LYRASOFT 專案用各類實用 TS/JS 工具集。
     * [Reactive](#reactive)
     * [Loading](#loading)
     * [LifeCycle](#lifecycle)
+    * [Utilities](#utilities)
   * [Ionic 專用](#ionic-專用)
     * [Alert](#alert)
     * [Loading](#loading-1)
@@ -95,7 +99,7 @@ if (d) {
 ```scss
 // 要放在 BS _variables.scss 後面，因為會用到 BS 變數
 
-@import "@lyrasoft/ts-toolkit/src/sweetalert-bootstrap5";
+@import "@lyrasoft/ts-toolkit/src/scss/sweetalert-bootstrap5";
 
 // ...
 ```
@@ -118,6 +122,27 @@ import { AlertAdapter } from './alert-adapter';
 AlertAdapter.confirmText = () => '確認';
 AlertAdapter.cancelText = () => '取消';
 AlertAdapter.deleteText = () => '刪除';
+```
+
+### Crypto
+
+```ts
+import {
+  base64UrlDecode,
+  base64UrlEncode,
+  randomBytesString,
+  randomString, 
+  STR_SEED_BASE62,
+  tid,
+  uid,
+} from '@lyrasoft/ts-toolkit/src/generic';
+
+uid();
+tid();
+randomBytesString(16);
+randomString(32, STR_SEED_BASE62);
+base64UrlEncode();
+base64UrlDecode();
 ```
 
 ### DateTime
@@ -143,6 +168,41 @@ yarn add dayjs --dev
 </template>
 ```
 
+### Number
+
+```ts
+import { numberFormat } from '@lyrasoft/ts-toolkit/src/generic';
+
+numberFormat(123456); // 123,456
+```
+
+### Queue & Stack
+
+```ts
+import { queue, stack } from './queue';
+
+const q = queue(1); // 一次只能執行一個
+
+// 會依序執行
+q.push(async () => ...);
+q.push(async () => ...);
+q.push(async () => ...);
+q.push(async () => ...);
+
+// -------------
+
+const s = stack();
+
+s.observe(() => ...) // 監聽改變
+
+s.push(...);
+s.push(...);
+s.push(...);
+s.push(...);
+
+s.pop(); // 觸發事件
+```
+
 ### Promise
 
 快速建立可以從外部 resolve 的 Promise
@@ -165,6 +225,17 @@ resolve();
 import { sleep } from '@lyrasoft/ts-toolkit/src/generic';
 
 await sleep(500);
+```
+
+`nextTick()` 快速將後續程式推入下個循環
+
+```ts
+await nextTick();
+nextTick().then(() => ...);
+
+// OR
+
+nextTick(() => ...);
 ```
 
 ### Typography
@@ -289,6 +360,23 @@ import { onCreatedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue';
 await onCreatedOrRouteUpdate((to) => {
   loadItem(to.params.id);
 });
+```
+
+### Utilities
+
+`uniqueItem()` 與 `uniqueItemList()` 用來將列表物件自動加上 `uid`
+
+```ts
+import { uniqueItemList } from '@lyrasoft/ts-toolkit/src/vue';
+
+const res = await axios.get(...);
+const rawItems = res.data.data;
+
+// 型別會自動加上 uid
+const items = uniqueItemList(items);
+
+// 可以自訂欄位
+const items = uniqueItemList(items, '__key');
 ```
 
 ## Ionic 專用

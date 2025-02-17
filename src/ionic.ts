@@ -1,2 +1,1 @@
-
-
+export * from './ionic/index';
