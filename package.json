@@ -1,6 +1,6 @@
 {
   "name": "@lyrasoft/ts-toolkit",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "LYRASOFT Typescript utilities tools.",
   "main": "index.js",
   "author": "Simon Asika",
