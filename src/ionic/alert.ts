@@ -1,5 +1,5 @@
 import { alertController, } from '@ionic/vue';
-import { AlertAdapter } from '../shared';
+import { AlertAdapter } from '../generic';
 
 export async function ionicAlert(title: any, text?: string, type = 'warning'): Promise<void> {
   if (title instanceof Error || title.message) {

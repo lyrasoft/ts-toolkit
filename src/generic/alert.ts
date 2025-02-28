@@ -1,4 +1,4 @@
-import { AlertAdapter } from '../shared';
+import { AlertAdapter } from './alert-adapter';
 
 export async function simpleAlert(
   title: string,

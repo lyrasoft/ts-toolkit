@@ -1,4 +1,4 @@
-import { AlertAdapter } from '../shared';
+import { AlertAdapter } from './alert-adapter';
 
 type SwalParams = Exclude<Parameters<typeof swal>[0], string>;
 
