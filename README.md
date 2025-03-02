@@ -283,6 +283,8 @@ await apiClient.post(
 )
 ```
 
+`wrapRef()` 與 `wrapRefs()` 則用來強制包裹變數成為 ref，若原本已是 ref 或 computed 則原封不動返回。
+
 ### Loading
 
 常用的 `useLoading()` 現在可以直接呼叫，不用自己寫了
@@ -352,15 +354,35 @@ onBeforeRouteUpdate((to) => {
 await loadItem(route.params.id);
 ```
 
-則現在可以這樣做
+現在可以改成這樣做
 
 ```ts
 import { onCreatedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue';
 
-await onCreatedOrRouteUpdate((to) => {
-  loadItem(to.params.id);
+const item = ref();
+
+await onCreatedOrRouteUpdate(async (to) => {
+  item.value = await loadItem(to.params.id);
 });
 ```
+
+如果您想要避免前面宣告的變數可能是 `undefined`，可以改成這樣：
+
+```ts
+import { loadInstantAndRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue';
+
+const { item, bar, yoo } = await loadInstantAndRouteUpdate(async () => {
+  const res = await apiClient.get(...);
+  
+  return res.data.data as {
+    item: FooItem,
+    bar: Bar,
+    yoo: Yoo,
+  };
+});
+```
+
+如此這些 API 載入回來的變數都不會有 undefined type，因為他們都是等待載入完後才宣告的。
 
 ### Utilities
 

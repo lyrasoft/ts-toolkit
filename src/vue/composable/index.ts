@@ -1,2 +1,3 @@
-export { default as onCreatedOrRouteUpdate } from './onCreatedOrRouteUpdate';
-export { default as onMountedOrRouteUpdate } from './onMountedOrRouteUpdate';
+export * from './onCreatedOrRouteUpdate';
+export * from './onMountedOrRouteUpdate';
+export * from './loadInstantAndRouteUpdate';

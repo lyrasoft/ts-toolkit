@@ -14,9 +14,11 @@ export async function sweetAlert(
     title,
     text,
     icon,
-    buttons: [
-      AlertAdapter.confirmText(),
-    ],
+    buttons: {
+      confirm: {
+        text: AlertAdapter.confirmText(),
+      }
+    },
   };
 
   if (extra) {

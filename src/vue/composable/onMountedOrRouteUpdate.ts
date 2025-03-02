@@ -6,7 +6,7 @@ import {
   useRoute
 } from 'vue-router';
 
-export default function (handler: (to?: RouteLocationNormalized, from?: RouteLocationNormalizedLoaded) => any) {
+export function onMountedOrRouteUpdate(handler: (to?: RouteLocationNormalized, from?: RouteLocationNormalizedLoaded) => any) {
   const route = useRoute();
 
   onMounted(() => {

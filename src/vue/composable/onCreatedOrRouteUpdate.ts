@@ -5,7 +5,7 @@ import {
   useRoute
 } from 'vue-router';
 
-export default async function (handler: (to: RouteLocationNormalized, from?: RouteLocationNormalizedLoaded) => any) {
+export function onCreatedOrRouteUpdate<T = any>(handler: (to: RouteLocationNormalized, from?: RouteLocationNormalizedLoaded) => T): T {
   const route = useRoute();
 
   onBeforeRouteUpdate((to, from) => {
