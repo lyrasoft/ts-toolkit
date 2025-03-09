@@ -1,5 +1,4 @@
 export * from './alert';
-export * from './sweetalert';
 export * from './alert-adapter';
 export * from './crypto';
 export * from './datetime';

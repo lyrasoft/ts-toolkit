@@ -1,4 +1,4 @@
-import { AlertAdapter } from './alert-adapter';
+import { AlertAdapter } from './generic';
 
 type SwalParams = Exclude<Parameters<typeof swal>[0], string>;
 

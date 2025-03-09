@@ -50,6 +50,19 @@ import { ... } from '@lyrasoft/ts-toolkit/src/ionic';
 
 主要差異在某些 UI 介面，Ionic 的版本會改用 Ionic 專屬 UI 元素。
 
+其他入口因為個別有不同的相依，要獨立載入
+
+```ts
+// SweetAlert
+import { ... } from '@lyrasoft/ts-toolkit/src/sweetalert';
+
+// Vue Composable
+import { ... } from '@lyrasoft/ts-toolkit/src/vue/composable';
+
+// Vue Loading Overlay
+import { ... } from '@lyrasoft/ts-toolkit/src/vue/loading-overlay';
+```
+
 ## Generic
 
 ### AlertAdapter
@@ -333,7 +346,7 @@ onBeforeRouteUpdate((to) => {
 現在我們可以這樣寫
 
 ```ts
-import { onMountedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue';
+import { onMountedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue/composable';
 
 onMountedOrRouteUpdate((to) => {
   loadItem(to.params.id);
@@ -357,7 +370,7 @@ await loadItem(route.params.id);
 現在可以改成這樣做
 
 ```ts
-import { onCreatedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue';
+import { onCreatedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue/composable';
 
 const item = ref();
 
@@ -369,7 +382,7 @@ await onCreatedOrRouteUpdate(async (to) => {
 如果您想要避免前面宣告的變數可能是 `undefined`，可以改成這樣：
 
 ```ts
-import { loadInstantAndRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue';
+import { loadInstantAndRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue/composable';
 
 const { item, bar, yoo } = await loadInstantAndRouteUpdate(async () => {
   const res = await apiClient.get(...);
