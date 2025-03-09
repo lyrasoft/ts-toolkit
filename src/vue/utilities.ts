@@ -11,3 +11,7 @@ export function uniqueItem<T extends object, K extends string = 'uid'>(item: T, 
 export function uniqueItemList<T extends object, K extends string = 'uid'>(items: T[], keyName: K = 'uid' as K): UniqItem<T, K>[] {
   return items.map((item) => uniqueItem<T, K>(item));
 }
+
+export function keep(...args: any[]) {
+  return null;
+}
