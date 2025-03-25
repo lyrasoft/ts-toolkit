@@ -1,3 +1,4 @@
+import { isNode } from './env';
 
 export function base64UrlEncode(string: string): string {
   return btoa(String(string))
@@ -33,12 +34,23 @@ export function tid(prefix: string = ''): string {
 }
 
 export function randomBytesString(n: number = 12): string {
-  const QUOTA = 65536;
-  const crypto = window.crypto;
-
-  if (!crypto) {
+  if (!isNode() && !globalThis.crypto) {
     return String(Math.floor(Math.random() * (n ** 10)));
   }
+
+  return Array.from(randomBytes(n))
+    .map(x => x.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+export function randomBytes(n: number = 12): Uint8Array {
+  const QUOTA = 65536;
+
+  if (isNode()) {
+    return require('crypto').randomBytes(n);
+  }
+
+  const crypto = globalThis.crypto;
 
   const a = new Uint8Array(n);
 
@@ -46,9 +58,7 @@ export function randomBytesString(n: number = 12): string {
     crypto.getRandomValues(a.subarray(i, i + Math.min(n - i, QUOTA)));
   }
 
-  return Array.from(a)
-    .map(x => x.toString(16).padStart(2, '0'))
-    .join('');
+  return a;
 }
 
 export const STR_SEED_BASE32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
