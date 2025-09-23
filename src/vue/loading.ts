@@ -20,10 +20,10 @@ export function useLoading(loading?: Ref<boolean>) {
     }
   }
 
-  const wrap = function <T, R, K extends ((...args: any[]) => R)>(
+  const wrap = function <T, K extends ((...args: any[]) => any)>(
     callback: K,
     errorAlert = true
-  ): (...args: Parameters<K>) => Promise<R> {
+  ): (...args: Parameters<K>) => Promise<ReturnType<K>> {
     return (...args: any[]) => {
       return run(async () => callback(...args), errorAlert);
     };

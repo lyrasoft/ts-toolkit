@@ -33,32 +33,20 @@ export function tid(prefix: string = ''): string {
   return uid(prefix, true);
 }
 
-export function randomBytesString(n: number = 12): string {
+export function randomBytesString(size: number = 12): string {
   if (!isNode() && !globalThis.crypto) {
-    return String(Math.floor(Math.random() * (n ** 10)));
+    return String(Math.floor(Math.random() * (size ** 10)));
   }
 
-  return Array.from(randomBytes(n))
+  return Array.from(randomBytes(size))
     .map(x => x.toString(16).padStart(2, '0'))
     .join('');
 }
 
-export function randomBytes(n: number = 12): Uint8Array {
-  const QUOTA = 65536;
-
-  if (isNode()) {
-    return require('crypto').randomBytes(n);
-  }
-
-  const crypto = globalThis.crypto;
-
-  const a = new Uint8Array(n);
-
-  for (let i = 0; i < n; i += QUOTA) {
-    crypto.getRandomValues(a.subarray(i, i + Math.min(n - i, QUOTA)));
-  }
-
-  return a;
+export function randomBytes(size: number = 12): Uint8Array {
+  const arr = new Uint8Array(size);
+  globalThis.crypto.getRandomValues(arr);
+  return arr;
 }
 
 export const STR_SEED_BASE32 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';

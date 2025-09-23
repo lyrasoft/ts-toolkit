@@ -2,7 +2,12 @@
   "name": "@lyrasoft/ts-toolkit",
   "version": "0.1.10",
   "description": "LYRASOFT Typescript utilities tools.",
-  "main": "index.js",
+  "exports": {
+    "./generic": "./src/generic.ts",
+    "./ionic": "./src/ionic.ts",
+    "./sweetalert": "./src/sweetalert.ts",
+    "./vue": "./src/vue.ts"
+  },
   "author": "Simon Asika",
   "license": "MIT",
   "scripts": {
@@ -11,7 +16,6 @@
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
-    "dayjs": "^1.11.13",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
@@ -23,6 +27,7 @@
     "@types/minimist": "^1",
     "@types/node": "^22.13.13",
     "@vue/tsconfig": "^0.7.0",
+    "dayjs": "^1.11.13",
     "minimist": "^1.2.8",
     "rollup": "^4.32.1",
     "rollup-plugin-dts": "^6.1.1",

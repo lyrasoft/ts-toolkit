@@ -39,13 +39,13 @@ yarn add @lyrasoft/ts-toolkit --dev
 
 ```ts
 // 一般專案用
-import { ... } from '@lyrasoft/ts-toolkit/src/generic';
+import { ... } from '@lyrasoft/ts-toolkit/generic';
 
 // Vite/Vue 專案用
-import { ... } from '@lyrasoft/ts-toolkit/src/vue';
+import { ... } from '@lyrasoft/ts-toolkit/vue';
 
 // Ionic/Vue 專案用
-import { ... } from '@lyrasoft/ts-toolkit/src/ionic';
+import { ... } from '@lyrasoft/ts-toolkit/ionic';
 ```
 
 主要差異在某些 UI 介面，Ionic 的版本會改用 Ionic 專屬 UI 元素。
@@ -54,13 +54,13 @@ import { ... } from '@lyrasoft/ts-toolkit/src/ionic';
 
 ```ts
 // SweetAlert
-import { ... } from '@lyrasoft/ts-toolkit/src/sweetalert';
+import { ... } from '@lyrasoft/ts-toolkit/sweetalert';
 
 // Vue Composable
-import { ... } from '@lyrasoft/ts-toolkit/src/vue/composable';
+import { ... } from '@lyrasoft/ts-toolkit/vue/composable';
 
 // Vue Loading Overlay
-import { ... } from '@lyrasoft/ts-toolkit/src/vue/loading-overlay';
+import { ... } from '@lyrasoft/ts-toolkit/vue/loading-overlay';
 ```
 
 ## Generic
@@ -76,7 +76,7 @@ yarn add sweetalert --dev
 然後在 `main.ts` 設定
 
 ```ts
-import { useSweetAlertAdapter } from '@lyrasoft/ts-toolkit/src/generic';
+import { useSweetAlertAdapter } from '@lyrasoft/ts-toolkit/generic';
 
 useSweetAlertAdapter(true);
 ```
@@ -84,7 +84,7 @@ useSweetAlertAdapter(true);
 這樣就可以用以下函式快速呼叫 SweetAlert，有三個常用函式
 
 ```ts
-import { simpleAlert, simpleConfirm, simpleDeleteConfirm } from '@lyrasoft/ts-toolkit/src/generic';
+import { simpleAlert, simpleConfirm, simpleDeleteConfirm } from '@lyrasoft/ts-toolkit/generic';
 
 // Alert
 await simpleAlert('Title', 'text', 'icon');
@@ -112,7 +112,7 @@ if (d) {
 ```scss
 // 要放在 BS _variables.scss 後面，因為會用到 BS 變數
 
-@import "@lyrasoft/ts-toolkit/src/scss/sweetalert-bootstrap5";
+@import "@lyrasoft/ts-toolkit/scss/sweetalert-bootstrap5";
 
 // ...
 ```
@@ -120,7 +120,7 @@ if (d) {
 手動覆蓋，如果你的專案用的是別套 alert，可以手動設定
 
 ```ts
-import { AlertAdapter } from '@lyrasoft/ts-toolkit/src/generic';
+import { AlertAdapter } from '@lyrasoft/ts-toolkit/generic';
 
 AlertAdapter.alert = (title: string, text?: string, icon?: string, extra?: any) => Promise<boolean>;
 AlertAdapter.confirm = (title: string, text?: string, icon?: string, extra?: any) => Promise<boolean>;
@@ -148,7 +148,7 @@ import {
   STR_SEED_BASE62,
   tid,
   uid,
-} from '@lyrasoft/ts-toolkit/src/generic';
+} from '@lyrasoft/ts-toolkit/generic';
 
 uid();
 tid();
@@ -160,16 +160,26 @@ base64UrlDecode();
 
 ### DateTime
 
-簡單的 `dateToFormat()` 用於任何地方。需要 `dayjs`
+簡單的 `dateToFormat()` 用於任何地方。需要先安裝 `dayjs`
 
 ```shell
 yarn add dayjs --dev
 ```
 
+並在應用的開頭先執行 `initDayjs()`
+
+```ts
+// main.ts
+import { initDayjs } from '@lyrasoft/ts-toolkit/generic';
+
+initDayjs();
+```
+
+
 ```vue
 
 <script lang="ts" setup>
-  import { dateToFormat, DateFormat } from '@lyrasoft/ts-toolkit/src/generic';
+  import { dateToFormat, DateFormat } from '@lyrasoft/ts-toolkit/generic';
 </script>
 
 <template>
@@ -184,7 +194,7 @@ yarn add dayjs --dev
 ### Number
 
 ```ts
-import { numberFormat } from '@lyrasoft/ts-toolkit/src/generic';
+import { numberFormat } from '@lyrasoft/ts-toolkit/generic';
 
 numberFormat(123456); // 123,456
 ```
@@ -221,7 +231,7 @@ s.pop(); // 觸發事件
 快速建立可以從外部 resolve 的 Promise
 
 ```ts
-import { promiseWithResolvers } from '@lyrasoft/ts-toolkit/src/generic';
+import { promiseWithResolvers } from '@lyrasoft/ts-toolkit/generic';
 
 const { promise, resolve ,reject } = promiseWithResolvers();
 
@@ -235,7 +245,7 @@ resolve();
 快速 sleep，用來取代 `setTimeout()`
 
 ```ts
-import { sleep } from '@lyrasoft/ts-toolkit/src/generic';
+import { sleep } from '@lyrasoft/ts-toolkit/generic';
 
 await sleep(500);
 ```
@@ -256,7 +266,7 @@ nextTick(() => ...);
 一些印出文字或摘要的方便函式
 
 ```ts
-import { nl2br, htmlEscape, stripHtml, summaryText } from '@lyrasoft/ts-toolkit/src/generic';
+import { nl2br, htmlEscape, stripHtml, summaryText } from '@lyrasoft/ts-toolkit/generic';
 
 // NL to <br>
 nl2br(text);
@@ -281,7 +291,7 @@ summaryText(text, 150);
 `unrefs()` 用來將物件內的 refs 轉回一般變數，方便用在呼叫 API 時丟參數
 
 ```ts
-import { unrefs } from '@lyrasoft/ts-toolkit/src/vue';
+import { unrefs } from '@lyrasoft/ts-toolkit/vue';
 import { ref } from 'vue';
 
 const foo = ref();
@@ -304,7 +314,7 @@ await apiClient.post(
 
 ```vue
 <script lang="ts" setup>
-  import { useLoading } from '@lyrasoft/ts-toolkit/src/vue';
+  import { useLoading } from '@lyrasoft/ts-toolkit/vue';
 
   const { loading, run } = useLoading();
 
@@ -346,7 +356,7 @@ onBeforeRouteUpdate((to) => {
 現在我們可以這樣寫
 
 ```ts
-import { onMountedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue/composable';
+import { onMountedOrRouteUpdate } from '@lyrasoft/ts-toolkit/vue/composable';
 
 onMountedOrRouteUpdate((to) => {
   loadItem(to.params.id);
@@ -370,7 +380,7 @@ await loadItem(route.params.id);
 現在可以改成這樣做
 
 ```ts
-import { onCreatedOrRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue/composable';
+import { onCreatedOrRouteUpdate } from '@lyrasoft/ts-toolkit/vue/composable';
 
 const item = ref();
 
@@ -382,7 +392,7 @@ await onCreatedOrRouteUpdate(async (to) => {
 如果您想要避免前面宣告的變數可能是 `undefined`，可以改成這樣：
 
 ```ts
-import { loadInstantAndRouteUpdate } from '@lyrasoft/ts-toolkit/src/vue/composable';
+import { loadInstantAndRouteUpdate } from '@lyrasoft/ts-toolkit/vue/composable';
 
 const { item, bar, yoo } = await loadInstantAndRouteUpdate(async () => {
   const res = await apiClient.get(...);
@@ -402,7 +412,7 @@ const { item, bar, yoo } = await loadInstantAndRouteUpdate(async () => {
 `uniqueItem()` 與 `uniqueItemList()` 用來將列表物件自動加上 `uid`
 
 ```ts
-import { uniqueItemList } from '@lyrasoft/ts-toolkit/src/vue';
+import { uniqueItemList } from '@lyrasoft/ts-toolkit/vue';
 
 const res = await axios.get(...);
 const rawItems = res.data.data;
@@ -423,7 +433,7 @@ const items = uniqueItemList(items, '__key');
 ```ts
 // main.ts
 
-import { useIonicAlertAdapter } from '@lyrasoft/ts-toolkit/src/ionic';
+import { useIonicAlertAdapter } from '@lyrasoft/ts-toolkit/ionic';
 
 useIonicAlertAdapter();
 ```
@@ -447,7 +457,7 @@ const { run, loading } = useLoadingOverlay('Loading...', options);
 ### 常用工具組
 
 ```ts
-import { ionicActionSheetConfirm, ionicToast } from '@lyrasoft/ts-toolkit/src/ionic';
+import { ionicActionSheetConfirm, ionicToast } from '@lyrasoft/ts-toolkit/ionic';
 
 ionicActionSheetConfirm('text', buttons);
 ionicToast('text', position, 5000);
