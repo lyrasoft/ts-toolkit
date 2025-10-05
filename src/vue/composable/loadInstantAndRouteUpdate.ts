@@ -1,8 +1,6 @@
 import {
-  onBeforeRouteUpdate,
   type RouteLocationNormalized,
   type RouteLocationNormalizedLoaded,
-  useRoute,
 } from 'vue-router';
 import { type WrapRefs, wrapRefs } from '../reactives';
 
@@ -16,6 +14,8 @@ export async function loadInstantAndRouteUpdate<T extends Record<string, any> = 
   handler: (to: RouteLocationNormalized,
             from?: RouteLocationNormalizedLoaded) => Promise<T | undefined> | T | undefined,
 ): Promise<WrapRefs<T> | undefined> {
+  const { useRoute, onBeforeRouteUpdate } = await import('vue-router');
+
   const route = useRoute();
 
   let returnValue: WrapRefs<T> | undefined = undefined;

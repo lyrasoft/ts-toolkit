@@ -1,4 +1,4 @@
-import { type App, type Ref, ref } from 'vue';
+import { type App, ref } from 'vue';
 import { simpleAlert } from '../generic';
 
 

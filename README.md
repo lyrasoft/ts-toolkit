@@ -137,6 +137,46 @@ AlertAdapter.cancelText = () => '取消';
 AlertAdapter.deleteText = () => '刪除';
 ```
 
+### Notify
+
+`AlertAdapter` 也有 `notify()`，但預設是用 `console.log()`，讓你在自己的專案中，取代成其他的 notify or toast 套件，
+要調用時，呼叫 `simpleNotify()`。
+
+```ts
+import { simpleNotify } from '@lyrasoft/ts-toolkit/generic';
+
+const clear = await simpleNotify('text', 'text'); // type: info | warn | error
+
+// Clear single message
+clear();
+```
+
+另外也能用 `clearNotifities()` 一次清除所有訊息
+
+```ts
+import { clearNotifities } from '@lyrasoft/ts-toolkit/generic';
+
+await clearNotifities();
+```
+
+如果你想要改用其他套件，可以手動覆蓋
+
+```ts
+import { AlertAdapter } from '@lyrasoft/ts-toolkit/generic';
+
+AlertAdapter.notify = async (title: string, text?: string, type?: string) => {
+  const id = simeToastPackage.show(title, text, { type });
+  
+  return () => {
+    simeToastPackage.clear(id);
+  };
+};
+
+AlertAdapter.clearNotifities = async () => {
+  simeToastPackage.clearAll();
+};
+```
+
 ### Crypto
 
 ```ts
