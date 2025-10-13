@@ -53,6 +53,9 @@ import { ... } from '@lyrasoft/ts-toolkit/ionic';
 其他入口因為個別有不同的相依，要獨立載入
 
 ```ts
+// Datetime
+import { ... } from '@lyrasoft/ts-toolkit/datetime';
+
 // SweetAlert
 import { ... } from '@lyrasoft/ts-toolkit/sweetalert';
 
@@ -206,20 +209,10 @@ base64UrlDecode();
 yarn add dayjs --dev
 ```
 
-並在應用的開頭先執行 `initDayjs()`
-
-```ts
-// main.ts
-import { initDayjs } from '@lyrasoft/ts-toolkit/generic';
-
-initDayjs();
-```
-
-
 ```vue
 
 <script lang="ts" setup>
-  import { dateToFormat, DateFormat } from '@lyrasoft/ts-toolkit/generic';
+  import { dateToFormat, DateFormat } from '@lyrasoft/ts-toolkit/datetime';
 </script>
 
 <template>

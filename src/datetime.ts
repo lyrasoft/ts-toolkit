@@ -1,4 +1,4 @@
-import type { Dayjs, ConfigType } from 'dayjs';
+import dayjs from 'dayjs';
 
 export enum DateFormat {
   YMD = 'YYYY-MM-DD',
@@ -7,13 +7,13 @@ export enum DateFormat {
   ISO8601 = 'YYYY-MM-DDTHH:mm:ssZ[Z]',
 }
 
-let dayjs: (date: ConfigType) => Dayjs;
-
-async function initDayjs() {
-  dayjs = (await import('dayjs')).default;
-
-  return dayjs;
-}
+// let dayjs: (date: ConfigType) => Dayjs;
+//
+// async function initDayjs() {
+//   dayjs = (await import('dayjs')).default;
+//
+//   return dayjs;
+// }
 
 export function dateToFormat(date: any, format: string = 'YYYY-MM-DD HH:mm') {
   if (date == null) {

@@ -6,6 +6,7 @@
     "./generic": "./src/generic.ts",
     "./ionic": "./src/ionic.ts",
     "./sweetalert": "./src/sweetalert.ts",
+    "./datetime": "./src/datetime.ts",
     "./vue": "./src/vue.ts",
     "./vue/composable": "./src/vue/composable/index.ts",
     "./vue/loading-overlay": "./src/vue/loading-overlay.ts"

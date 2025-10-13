@@ -2,7 +2,6 @@ export * from './alert';
 export * from './alert-adapter';
 export * from './env';
 export * from './crypto';
-export * from './datetime';
 export * from './number';
 export * from './promise';
 export * from './queue';
