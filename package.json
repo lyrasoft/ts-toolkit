@@ -9,7 +9,8 @@
     "./datetime": "./src/datetime.ts",
     "./vue": "./src/vue.ts",
     "./vue/composable": "./src/vue/composable/index.ts",
-    "./vue/loading-overlay": "./src/vue/loading-overlay.ts"
+    "./vue/loading-overlay": "./src/vue/loading-overlay.ts",
+    "./*": "./*"
   },
   "author": "Simon Asika",
   "license": "MIT",
