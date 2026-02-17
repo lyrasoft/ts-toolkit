@@ -17,7 +17,7 @@ export class TaskQueue {
   push<T extends ((...args: any[]) => any)>(callback: T): Promise<Awaited<ReturnType<T>>> {
     const p = new Promise<Awaited<ReturnType<T>>>((resolve, reject) => {
       this.items.push(() => {
-        return Promise.resolve(callback()).then(resolve);
+        return Promise.resolve(callback()).then(resolve).catch(reject);
       });
     });
 
