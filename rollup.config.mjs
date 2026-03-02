@@ -7,7 +7,7 @@ export default [
   {
     input: 'src/generic.ts',
     output: {
-      file: 'src/generic.d.ts',
+      file: 'dist/generic.d.ts',
       format: 'es',
     },
     plugins: [
@@ -19,7 +19,7 @@ export default [
   {
     input: 'src/ionic.ts',
     output: {
-      file: 'src/ionic.d.ts',
+      file: 'dist/ionic.d.ts',
       format: 'es',
     },
     plugins: [
@@ -31,7 +31,7 @@ export default [
   {
     input: 'src/sweetalert.ts',
     output: {
-      file: 'src/sweetalert.d.ts',
+      file: 'dist/sweetalert.d.ts',
       format: 'es',
     },
     plugins: [
